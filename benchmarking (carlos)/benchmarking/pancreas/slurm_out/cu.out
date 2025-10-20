@@ -1,0 +1,571 @@
+/ubc/cs/research/beaver/projects/carlos/hyperbolic/code/benchmarking/train_celluntangler.py:89: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:278.)
+  mask = torch.tensor([mask_z1, mask_z2])
+
+Loading config file
+activation: gelu
+batch_invariant: true
+batch_size: 128
+component_subspaces: {}
+device: !!python/object/apply:torch.device
+- cpu
+end: 1.0
+end_epoch: 1
+end_z2_no_grad: 500
+epochs: 200
+eps: 0.001
+fixed_curvature: true
+gain: 1.0
+h_dim: 32
+init: custom
+learning_rate: 0.001
+max_epochs: 500
+model_name: r2, r2
+momentum: 0.99
+n_batch:
+- 1
+scalar_parametrization: false
+seed: 2025
+start: 1.0
+start_z2_no_grad: 0
+use_adamw: true
+use_batch_norm: false
+use_z1_batch: true
+use_z2_batch: true
+use_z2_no_grad: true
+weight_decay: null
+
+
+Loading data
+Dataset seed: 2025
+
+ Setting up and training model
+Linear(in_features=32, out_features=2, bias=True)
+initializing Xavier uniform weights in Linear
+Linear(in_features=32, out_features=2, bias=True)
+initializing Xavier uniform weights in Linear
+RotatedHyperbolicComponent(R^3)
+NBVAE(
+  (components): ModuleList(
+    (0-1): 2 x RotatedHyperbolicComponent(R^3)
+  )
+  (encoder): Sequential(
+    (0): Linear(in_features=2059, out_features=128, bias=True)
+    (1): GELU(approximate='none')
+    (2): Linear(in_features=128, out_features=64, bias=True)
+    (3): GELU(approximate='none')
+    (4): Linear(in_features=64, out_features=32, bias=True)
+    (5): GELU(approximate='none')
+  )
+  (decoder): Sequential(
+    (0): Linear(in_features=7, out_features=64, bias=True)
+    (1): GELU(approximate='none')
+    (2): Linear(in_features=64, out_features=128, bias=True)
+    (3): GELU(approximate='none')
+  )
+  (fc_mu): Linear(in_features=128, out_features=2059, bias=True)
+  (fc_sigma): Linear(in_features=128, out_features=2059, bias=True)
+)
+	TrainEpoch 0:	{'bce': -1853.481, 'kl': 0.355, 'elbo': -1853.837, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 1:	{'bce': -1441.096, 'kl': 0.613, 'elbo': -1441.709, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 2:	{'bce': -1322.946, 'kl': 1.844, 'elbo': -1324.79, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 3:	{'bce': -1273.474, 'kl': 3.24, 'elbo': -1276.715, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 4:	{'bce': -1236.19, 'kl': 3.801, 'elbo': -1239.991, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 5:	{'bce': -1203.234, 'kl': 4.603, 'elbo': -1207.837, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 6:	{'bce': -1177.963, 'kl': 5.238, 'elbo': -1183.201, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 7:	{'bce': -1162.355, 'kl': 5.927, 'elbo': -1168.281, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 8:	{'bce': -1149.474, 'kl': 6.381, 'elbo': -1155.855, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 9:	{'bce': -1138.466, 'kl': 7.026, 'elbo': -1145.492, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 10:	{'bce': -1129.652, 'kl': 7.435, 'elbo': -1137.088, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 11:	{'bce': -1123.81, 'kl': 7.873, 'elbo': -1131.684, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 12:	{'bce': -1117.369, 'kl': 8.459, 'elbo': -1125.827, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 13:	{'bce': -1115.481, 'kl': 9.138, 'elbo': -1124.619, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 14:	{'bce': -1110.814, 'kl': 9.285, 'elbo': -1120.099, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 15:	{'bce': -1106.911, 'kl': 9.43, 'elbo': -1116.341, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 16:	{'bce': -1102.611, 'kl': 9.438, 'elbo': -1112.049, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 17:	{'bce': -1099.298, 'kl': 9.515, 'elbo': -1108.812, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 18:	{'bce': -1096.564, 'kl': 9.596, 'elbo': -1106.16, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 19:	{'bce': -1097.342, 'kl': 9.54, 'elbo': -1106.882, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 20:	{'bce': -1095.103, 'kl': 9.263, 'elbo': -1104.366, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 21:	{'bce': -1090.337, 'kl': 9.552, 'elbo': -1099.889, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 22:	{'bce': -1088.534, 'kl': 9.668, 'elbo': -1098.202, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 23:	{'bce': -1086.409, 'kl': 9.78, 'elbo': -1096.189, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 24:	{'bce': -1084.754, 'kl': 9.717, 'elbo': -1094.471, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 25:	{'bce': -1083.771, 'kl': 9.704, 'elbo': -1093.475, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 26:	{'bce': -1081.901, 'kl': 9.731, 'elbo': -1091.632, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 27:	{'bce': -1079.962, 'kl': 9.852, 'elbo': -1089.814, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 28:	{'bce': -1079.111, 'kl': 9.834, 'elbo': -1088.945, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 29:	{'bce': -1077.189, 'kl': 9.868, 'elbo': -1087.057, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 30:	{'bce': -1076.369, 'kl': 10.013, 'elbo': -1086.382, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 31:	{'bce': -1074.166, 'kl': 9.989, 'elbo': -1084.155, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 32:	{'bce': -1073.42, 'kl': 10.001, 'elbo': -1083.422, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 33:	{'bce': -1071.988, 'kl': 10.111, 'elbo': -1082.098, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 34:	{'bce': -1071.113, 'kl': 10.072, 'elbo': -1081.185, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 35:	{'bce': -1070.766, 'kl': 9.953, 'elbo': -1080.719, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 36:	{'bce': -1069.345, 'kl': 10.121, 'elbo': -1079.466, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 37:	{'bce': -1068.932, 'kl': 10.046, 'elbo': -1078.978, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 38:	{'bce': -1068.25, 'kl': 10.033, 'elbo': -1078.283, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 39:	{'bce': -1067.053, 'kl': 10.062, 'elbo': -1077.115, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 40:	{'bce': -1066.392, 'kl': 10.096, 'elbo': -1076.488, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 41:	{'bce': -1066.016, 'kl': 10.086, 'elbo': -1076.102, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 42:	{'bce': -1065.669, 'kl': 10.054, 'elbo': -1075.723, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 43:	{'bce': -1065.029, 'kl': 10.093, 'elbo': -1075.123, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 44:	{'bce': -1064.081, 'kl': 10.033, 'elbo': -1074.114, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 45:	{'bce': -1063.956, 'kl': 10.026, 'elbo': -1073.983, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 46:	{'bce': -1063.82, 'kl': 10.006, 'elbo': -1073.825, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 47:	{'bce': -1062.512, 'kl': 10.046, 'elbo': -1072.558, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 48:	{'bce': -1062.817, 'kl': 9.863, 'elbo': -1072.679, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 49:	{'bce': -1062.292, 'kl': 10.004, 'elbo': -1072.296, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 50:	{'bce': -1061.901, 'kl': 9.923, 'elbo': -1071.824, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 51:	{'bce': -1061.604, 'kl': 9.957, 'elbo': -1071.561, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 52:	{'bce': -1061.041, 'kl': 9.943, 'elbo': -1070.984, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 53:	{'bce': -1060.693, 'kl': 9.913, 'elbo': -1070.607, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 54:	{'bce': -1059.976, 'kl': 9.905, 'elbo': -1069.881, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 55:	{'bce': -1060.208, 'kl': 9.943, 'elbo': -1070.15, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 56:	{'bce': -1059.669, 'kl': 9.861, 'elbo': -1069.53, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 57:	{'bce': -1059.171, 'kl': 9.806, 'elbo': -1068.977, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 58:	{'bce': -1059.101, 'kl': 9.87, 'elbo': -1068.971, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 59:	{'bce': -1058.607, 'kl': 9.894, 'elbo': -1068.501, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 60:	{'bce': -1058.11, 'kl': 9.834, 'elbo': -1067.945, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 61:	{'bce': -1058.154, 'kl': 9.826, 'elbo': -1067.98, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 62:	{'bce': -1057.476, 'kl': 9.846, 'elbo': -1067.322, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 63:	{'bce': -1057.41, 'kl': 9.86, 'elbo': -1067.27, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 64:	{'bce': -1057.05, 'kl': 9.767, 'elbo': -1066.818, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 65:	{'bce': -1056.872, 'kl': 9.872, 'elbo': -1066.744, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 66:	{'bce': -1056.903, 'kl': 9.8, 'elbo': -1066.704, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 67:	{'bce': -1056.826, 'kl': 9.773, 'elbo': -1066.599, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 68:	{'bce': -1056.143, 'kl': 9.875, 'elbo': -1066.018, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 69:	{'bce': -1055.952, 'kl': 9.765, 'elbo': -1065.717, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 70:	{'bce': -1055.725, 'kl': 9.723, 'elbo': -1065.448, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 71:	{'bce': -1056.436, 'kl': 9.716, 'elbo': -1066.152, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 72:	{'bce': -1055.545, 'kl': 9.763, 'elbo': -1065.308, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 73:	{'bce': -1055.229, 'kl': 9.794, 'elbo': -1065.022, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 74:	{'bce': -1055.22, 'kl': 9.756, 'elbo': -1064.976, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 75:	{'bce': -1054.801, 'kl': 9.776, 'elbo': -1064.577, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 76:	{'bce': -1054.561, 'kl': 9.663, 'elbo': -1064.224, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 77:	{'bce': -1054.993, 'kl': 9.697, 'elbo': -1064.69, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 78:	{'bce': -1055.203, 'kl': 9.685, 'elbo': -1064.889, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 79:	{'bce': -1054.297, 'kl': 9.686, 'elbo': -1063.983, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 80:	{'bce': -1053.846, 'kl': 9.672, 'elbo': -1063.519, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 81:	{'bce': -1053.872, 'kl': 9.702, 'elbo': -1063.574, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 82:	{'bce': -1053.559, 'kl': 9.668, 'elbo': -1063.227, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 83:	{'bce': -1053.296, 'kl': 9.736, 'elbo': -1063.032, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 84:	{'bce': -1053.207, 'kl': 9.664, 'elbo': -1062.87, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 85:	{'bce': -1052.935, 'kl': 9.631, 'elbo': -1062.566, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 86:	{'bce': -1052.574, 'kl': 9.69, 'elbo': -1062.264, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 87:	{'bce': -1052.341, 'kl': 9.677, 'elbo': -1062.018, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 88:	{'bce': -1052.213, 'kl': 9.653, 'elbo': -1061.865, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 89:	{'bce': -1052.125, 'kl': 9.672, 'elbo': -1061.796, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 90:	{'bce': -1051.949, 'kl': 9.671, 'elbo': -1061.62, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 91:	{'bce': -1052.175, 'kl': 9.659, 'elbo': -1061.834, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 92:	{'bce': -1051.6, 'kl': 9.708, 'elbo': -1061.308, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 93:	{'bce': -1051.341, 'kl': 9.687, 'elbo': -1061.029, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 94:	{'bce': -1051.162, 'kl': 9.643, 'elbo': -1060.805, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 95:	{'bce': -1051.265, 'kl': 9.662, 'elbo': -1060.927, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 96:	{'bce': -1051.075, 'kl': 9.649, 'elbo': -1060.725, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 97:	{'bce': -1051.292, 'kl': 9.649, 'elbo': -1060.942, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 98:	{'bce': -1051.362, 'kl': 9.707, 'elbo': -1061.069, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 99:	{'bce': -1050.487, 'kl': 9.63, 'elbo': -1060.117, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 100:	{'bce': -1051.491, 'kl': 9.668, 'elbo': -1061.16, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 101:	{'bce': -1050.938, 'kl': 9.659, 'elbo': -1060.597, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 102:	{'bce': -1050.402, 'kl': 9.591, 'elbo': -1059.993, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 103:	{'bce': -1050.15, 'kl': 9.67, 'elbo': -1059.82, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 104:	{'bce': -1050.012, 'kl': 9.597, 'elbo': -1059.609, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 105:	{'bce': -1049.267, 'kl': 9.656, 'elbo': -1058.923, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 106:	{'bce': -1049.299, 'kl': 9.635, 'elbo': -1058.935, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 107:	{'bce': -1049.001, 'kl': 9.672, 'elbo': -1058.674, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 108:	{'bce': -1049.025, 'kl': 9.604, 'elbo': -1058.629, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 109:	{'bce': -1049.267, 'kl': 9.663, 'elbo': -1058.93, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 110:	{'bce': -1048.943, 'kl': 9.622, 'elbo': -1058.565, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 111:	{'bce': -1048.497, 'kl': 9.706, 'elbo': -1058.202, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 112:	{'bce': -1048.616, 'kl': 9.678, 'elbo': -1058.294, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 113:	{'bce': -1048.639, 'kl': 9.668, 'elbo': -1058.308, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 114:	{'bce': -1048.096, 'kl': 9.634, 'elbo': -1057.73, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 115:	{'bce': -1047.935, 'kl': 9.74, 'elbo': -1057.675, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 116:	{'bce': -1048.343, 'kl': 9.691, 'elbo': -1058.035, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 117:	{'bce': -1047.721, 'kl': 9.688, 'elbo': -1057.409, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 118:	{'bce': -1047.849, 'kl': 9.661, 'elbo': -1057.51, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 119:	{'bce': -1047.52, 'kl': 9.644, 'elbo': -1057.164, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 120:	{'bce': -1047.407, 'kl': 9.71, 'elbo': -1057.118, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 121:	{'bce': -1046.877, 'kl': 9.712, 'elbo': -1056.589, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 122:	{'bce': -1047.157, 'kl': 9.612, 'elbo': -1056.769, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 123:	{'bce': -1047.124, 'kl': 9.668, 'elbo': -1056.792, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 124:	{'bce': -1047.144, 'kl': 9.647, 'elbo': -1056.791, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 125:	{'bce': -1046.624, 'kl': 9.674, 'elbo': -1056.298, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 126:	{'bce': -1046.708, 'kl': 9.659, 'elbo': -1056.367, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 127:	{'bce': -1046.291, 'kl': 9.736, 'elbo': -1056.027, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 128:	{'bce': -1046.175, 'kl': 9.681, 'elbo': -1055.856, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 129:	{'bce': -1046.023, 'kl': 9.63, 'elbo': -1055.653, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 130:	{'bce': -1046.254, 'kl': 9.695, 'elbo': -1055.949, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 131:	{'bce': -1045.945, 'kl': 9.674, 'elbo': -1055.618, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 132:	{'bce': -1045.794, 'kl': 9.613, 'elbo': -1055.407, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 133:	{'bce': -1045.608, 'kl': 9.712, 'elbo': -1055.321, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 134:	{'bce': -1045.504, 'kl': 9.674, 'elbo': -1055.178, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 135:	{'bce': -1045.834, 'kl': 9.661, 'elbo': -1055.495, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 136:	{'bce': -1045.64, 'kl': 9.69, 'elbo': -1055.33, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 137:	{'bce': -1044.983, 'kl': 9.697, 'elbo': -1054.68, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 138:	{'bce': -1045.078, 'kl': 9.733, 'elbo': -1054.81, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 139:	{'bce': -1044.958, 'kl': 9.699, 'elbo': -1054.657, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 140:	{'bce': -1044.936, 'kl': 9.691, 'elbo': -1054.627, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 141:	{'bce': -1044.515, 'kl': 9.71, 'elbo': -1054.224, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 142:	{'bce': -1044.87, 'kl': 9.694, 'elbo': -1054.564, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 143:	{'bce': -1044.533, 'kl': 9.725, 'elbo': -1054.258, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 144:	{'bce': -1044.263, 'kl': 9.715, 'elbo': -1053.978, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 145:	{'bce': -1044.139, 'kl': 9.753, 'elbo': -1053.892, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 146:	{'bce': -1044.099, 'kl': 9.717, 'elbo': -1053.816, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 147:	{'bce': -1043.871, 'kl': 9.701, 'elbo': -1053.572, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 148:	{'bce': -1044.135, 'kl': 9.681, 'elbo': -1053.816, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 149:	{'bce': -1043.865, 'kl': 9.727, 'elbo': -1053.591, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 150:	{'bce': -1044.127, 'kl': 9.676, 'elbo': -1053.802, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 151:	{'bce': -1043.476, 'kl': 9.794, 'elbo': -1053.27, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 152:	{'bce': -1043.471, 'kl': 9.711, 'elbo': -1053.181, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 153:	{'bce': -1043.47, 'kl': 9.781, 'elbo': -1053.251, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 154:	{'bce': -1043.188, 'kl': 9.746, 'elbo': -1052.934, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 155:	{'bce': -1042.925, 'kl': 9.744, 'elbo': -1052.669, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 156:	{'bce': -1042.868, 'kl': 9.738, 'elbo': -1052.606, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 157:	{'bce': -1042.733, 'kl': 9.732, 'elbo': -1052.465, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 158:	{'bce': -1042.429, 'kl': 9.761, 'elbo': -1052.19, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 159:	{'bce': -1043.19, 'kl': 9.721, 'elbo': -1052.912, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 160:	{'bce': -1042.725, 'kl': 9.844, 'elbo': -1052.569, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 161:	{'bce': -1042.619, 'kl': 9.739, 'elbo': -1052.358, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 162:	{'bce': -1042.637, 'kl': 9.797, 'elbo': -1052.435, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 163:	{'bce': -1042.388, 'kl': 9.766, 'elbo': -1052.153, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 164:	{'bce': -1042.116, 'kl': 9.729, 'elbo': -1051.845, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 165:	{'bce': -1041.912, 'kl': 9.852, 'elbo': -1051.764, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 166:	{'bce': -1041.948, 'kl': 9.781, 'elbo': -1051.73, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 167:	{'bce': -1041.526, 'kl': 9.789, 'elbo': -1051.315, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 168:	{'bce': -1041.492, 'kl': 9.749, 'elbo': -1051.241, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 169:	{'bce': -1041.459, 'kl': 9.817, 'elbo': -1051.276, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 170:	{'bce': -1041.261, 'kl': 9.809, 'elbo': -1051.07, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 171:	{'bce': -1041.349, 'kl': 9.807, 'elbo': -1051.157, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 172:	{'bce': -1041.267, 'kl': 9.807, 'elbo': -1051.074, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 173:	{'bce': -1041.459, 'kl': 9.875, 'elbo': -1051.335, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 174:	{'bce': -1041.026, 'kl': 9.786, 'elbo': -1050.812, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 175:	{'bce': -1040.924, 'kl': 9.815, 'elbo': -1050.739, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 176:	{'bce': -1040.714, 'kl': 9.867, 'elbo': -1050.581, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 177:	{'bce': -1040.464, 'kl': 9.834, 'elbo': -1050.298, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 178:	{'bce': -1040.495, 'kl': 9.864, 'elbo': -1050.359, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 179:	{'bce': -1040.803, 'kl': 9.805, 'elbo': -1050.608, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 180:	{'bce': -1040.536, 'kl': 9.858, 'elbo': -1050.394, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 181:	{'bce': -1040.417, 'kl': 9.848, 'elbo': -1050.264, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 182:	{'bce': -1040.184, 'kl': 9.848, 'elbo': -1050.032, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 183:	{'bce': -1040.218, 'kl': 9.886, 'elbo': -1050.104, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 184:	{'bce': -1040.052, 'kl': 9.819, 'elbo': -1049.871, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 185:	{'bce': -1040.098, 'kl': 9.843, 'elbo': -1049.941, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 186:	{'bce': -1039.749, 'kl': 9.899, 'elbo': -1049.647, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 187:	{'bce': -1039.9, 'kl': 9.864, 'elbo': -1049.765, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 188:	{'bce': -1040.349, 'kl': 9.809, 'elbo': -1050.158, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 189:	{'bce': -1040.547, 'kl': 9.856, 'elbo': -1050.403, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 190:	{'bce': -1039.93, 'kl': 9.929, 'elbo': -1049.86, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 191:	{'bce': -1039.333, 'kl': 9.89, 'elbo': -1049.223, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 192:	{'bce': -1039.419, 'kl': 9.866, 'elbo': -1049.285, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 193:	{'bce': -1039.191, 'kl': 9.888, 'elbo': -1049.079, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 194:	{'bce': -1039.529, 'kl': 9.854, 'elbo': -1049.383, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 195:	{'bce': -1039.337, 'kl': 9.875, 'elbo': -1049.212, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 196:	{'bce': -1038.76, 'kl': 9.933, 'elbo': -1048.693, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 197:	{'bce': -1038.977, 'kl': 9.898, 'elbo': -1048.874, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 198:	{'bce': -1038.695, 'kl': 9.903, 'elbo': -1048.598, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 199:	{'bce': -1038.499, 'kl': 9.912, 'elbo': -1048.411, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 200:	{'bce': -1038.615, 'kl': 9.902, 'elbo': -1048.517, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 201:	{'bce': -1038.552, 'kl': 9.956, 'elbo': -1048.509, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 202:	{'bce': -1038.381, 'kl': 9.969, 'elbo': -1048.35, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 203:	{'bce': -1038.414, 'kl': 9.945, 'elbo': -1048.358, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 204:	{'bce': -1038.252, 'kl': 9.963, 'elbo': -1048.215, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 205:	{'bce': -1038.04, 'kl': 9.914, 'elbo': -1047.954, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 206:	{'bce': -1037.874, 'kl': 10.0, 'elbo': -1047.874, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 207:	{'bce': -1038.171, 'kl': 9.933, 'elbo': -1048.104, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 208:	{'bce': -1037.929, 'kl': 9.98, 'elbo': -1047.909, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 209:	{'bce': -1037.986, 'kl': 9.92, 'elbo': -1047.905, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 210:	{'bce': -1037.79, 'kl': 9.977, 'elbo': -1047.767, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 211:	{'bce': -1037.644, 'kl': 9.972, 'elbo': -1047.616, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 212:	{'bce': -1037.652, 'kl': 9.984, 'elbo': -1047.636, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 213:	{'bce': -1037.171, 'kl': 10.034, 'elbo': -1047.204, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 214:	{'bce': -1037.296, 'kl': 10.003, 'elbo': -1047.299, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 215:	{'bce': -1037.363, 'kl': 10.002, 'elbo': -1047.364, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 216:	{'bce': -1036.727, 'kl': 9.995, 'elbo': -1046.722, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 217:	{'bce': -1036.92, 'kl': 9.978, 'elbo': -1046.898, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 218:	{'bce': -1037.01, 'kl': 10.024, 'elbo': -1047.034, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 219:	{'bce': -1036.899, 'kl': 10.017, 'elbo': -1046.916, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 220:	{'bce': -1037.362, 'kl': 9.949, 'elbo': -1047.311, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 221:	{'bce': -1036.905, 'kl': 9.995, 'elbo': -1046.9, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 222:	{'bce': -1036.509, 'kl': 10.015, 'elbo': -1046.524, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 223:	{'bce': -1036.847, 'kl': 9.941, 'elbo': -1046.788, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 224:	{'bce': -1036.494, 'kl': 10.07, 'elbo': -1046.564, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 225:	{'bce': -1036.714, 'kl': 10.011, 'elbo': -1046.725, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 226:	{'bce': -1036.668, 'kl': 10.0, 'elbo': -1046.668, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 227:	{'bce': -1035.991, 'kl': 10.046, 'elbo': -1046.038, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 228:	{'bce': -1036.442, 'kl': 10.004, 'elbo': -1046.446, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 229:	{'bce': -1036.704, 'kl': 9.978, 'elbo': -1046.682, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 230:	{'bce': -1037.039, 'kl': 10.042, 'elbo': -1047.081, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 231:	{'bce': -1036.279, 'kl': 10.031, 'elbo': -1046.31, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 232:	{'bce': -1035.826, 'kl': 10.093, 'elbo': -1045.919, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 233:	{'bce': -1035.85, 'kl': 10.046, 'elbo': -1045.896, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 234:	{'bce': -1035.378, 'kl': 10.078, 'elbo': -1045.457, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 235:	{'bce': -1035.868, 'kl': 10.01, 'elbo': -1045.877, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 236:	{'bce': -1035.759, 'kl': 10.057, 'elbo': -1045.816, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 237:	{'bce': -1035.451, 'kl': 10.035, 'elbo': -1045.486, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 238:	{'bce': -1035.573, 'kl': 10.018, 'elbo': -1045.591, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 239:	{'bce': -1035.656, 'kl': 10.136, 'elbo': -1045.792, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 240:	{'bce': -1035.032, 'kl': 10.071, 'elbo': -1045.103, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 241:	{'bce': -1034.731, 'kl': 10.113, 'elbo': -1044.844, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 242:	{'bce': -1034.692, 'kl': 10.058, 'elbo': -1044.75, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 243:	{'bce': -1034.957, 'kl': 10.061, 'elbo': -1045.017, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 244:	{'bce': -1034.865, 'kl': 10.137, 'elbo': -1045.002, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 245:	{'bce': -1034.543, 'kl': 10.081, 'elbo': -1044.624, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 246:	{'bce': -1034.781, 'kl': 10.12, 'elbo': -1044.901, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 247:	{'bce': -1034.618, 'kl': 10.14, 'elbo': -1044.758, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 248:	{'bce': -1035.088, 'kl': 10.047, 'elbo': -1045.136, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 249:	{'bce': -1034.441, 'kl': 10.077, 'elbo': -1044.518, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 250:	{'bce': -1034.509, 'kl': 10.12, 'elbo': -1044.629, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 251:	{'bce': -1035.065, 'kl': 10.089, 'elbo': -1045.154, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 252:	{'bce': -1034.727, 'kl': 10.1, 'elbo': -1044.827, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 253:	{'bce': -1034.683, 'kl': 10.111, 'elbo': -1044.794, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 254:	{'bce': -1034.378, 'kl': 10.07, 'elbo': -1044.448, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 255:	{'bce': -1034.29, 'kl': 10.158, 'elbo': -1044.448, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 256:	{'bce': -1034.672, 'kl': 10.085, 'elbo': -1044.758, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 257:	{'bce': -1034.258, 'kl': 10.127, 'elbo': -1044.385, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 258:	{'bce': -1034.063, 'kl': 10.174, 'elbo': -1044.237, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 259:	{'bce': -1033.919, 'kl': 10.121, 'elbo': -1044.039, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 260:	{'bce': -1033.645, 'kl': 10.197, 'elbo': -1043.842, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 261:	{'bce': -1033.7, 'kl': 10.116, 'elbo': -1043.816, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 262:	{'bce': -1033.676, 'kl': 10.122, 'elbo': -1043.798, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 263:	{'bce': -1033.706, 'kl': 10.138, 'elbo': -1043.844, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 264:	{'bce': -1033.734, 'kl': 10.153, 'elbo': -1043.887, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 265:	{'bce': -1033.34, 'kl': 10.163, 'elbo': -1043.503, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 266:	{'bce': -1033.549, 'kl': 10.167, 'elbo': -1043.716, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 267:	{'bce': -1033.815, 'kl': 10.221, 'elbo': -1044.036, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 268:	{'bce': -1033.219, 'kl': 10.191, 'elbo': -1043.41, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 269:	{'bce': -1033.268, 'kl': 10.16, 'elbo': -1043.428, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 270:	{'bce': -1033.41, 'kl': 10.217, 'elbo': -1043.626, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 271:	{'bce': -1034.2, 'kl': 10.135, 'elbo': -1044.335, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 272:	{'bce': -1033.644, 'kl': 10.126, 'elbo': -1043.771, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 273:	{'bce': -1033.083, 'kl': 10.133, 'elbo': -1043.216, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 274:	{'bce': -1033.287, 'kl': 10.148, 'elbo': -1043.435, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 275:	{'bce': -1033.376, 'kl': 10.113, 'elbo': -1043.489, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 276:	{'bce': -1033.077, 'kl': 10.214, 'elbo': -1043.291, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 277:	{'bce': -1032.634, 'kl': 10.156, 'elbo': -1042.79, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 278:	{'bce': -1032.366, 'kl': 10.181, 'elbo': -1042.547, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 279:	{'bce': -1032.481, 'kl': 10.204, 'elbo': -1042.684, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 280:	{'bce': -1032.65, 'kl': 10.214, 'elbo': -1042.863, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 281:	{'bce': -1032.59, 'kl': 10.11, 'elbo': -1042.7, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 282:	{'bce': -1032.383, 'kl': 10.213, 'elbo': -1042.596, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 283:	{'bce': -1032.388, 'kl': 10.206, 'elbo': -1042.594, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 284:	{'bce': -1031.964, 'kl': 10.304, 'elbo': -1042.268, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 285:	{'bce': -1032.28, 'kl': 10.217, 'elbo': -1042.497, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 286:	{'bce': -1032.015, 'kl': 10.267, 'elbo': -1042.282, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 287:	{'bce': -1032.268, 'kl': 10.209, 'elbo': -1042.477, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 288:	{'bce': -1032.068, 'kl': 10.22, 'elbo': -1042.288, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 289:	{'bce': -1032.537, 'kl': 10.278, 'elbo': -1042.815, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 290:	{'bce': -1032.028, 'kl': 10.234, 'elbo': -1042.262, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 291:	{'bce': -1031.797, 'kl': 10.209, 'elbo': -1042.006, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 292:	{'bce': -1031.207, 'kl': 10.238, 'elbo': -1041.445, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 293:	{'bce': -1031.231, 'kl': 10.267, 'elbo': -1041.499, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 294:	{'bce': -1031.282, 'kl': 10.269, 'elbo': -1041.551, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 295:	{'bce': -1031.14, 'kl': 10.222, 'elbo': -1041.362, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 296:	{'bce': -1031.765, 'kl': 10.221, 'elbo': -1041.986, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 297:	{'bce': -1031.688, 'kl': 10.283, 'elbo': -1041.971, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 298:	{'bce': -1031.58, 'kl': 10.266, 'elbo': -1041.846, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 299:	{'bce': -1031.363, 'kl': 10.29, 'elbo': -1041.653, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 300:	{'bce': -1031.182, 'kl': 10.294, 'elbo': -1041.477, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 301:	{'bce': -1031.424, 'kl': 10.304, 'elbo': -1041.728, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 302:	{'bce': -1032.504, 'kl': 10.245, 'elbo': -1042.749, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 303:	{'bce': -1032.123, 'kl': 10.233, 'elbo': -1042.356, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 304:	{'bce': -1031.272, 'kl': 10.284, 'elbo': -1041.557, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 305:	{'bce': -1031.085, 'kl': 10.293, 'elbo': -1041.378, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 306:	{'bce': -1030.905, 'kl': 10.324, 'elbo': -1041.229, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 307:	{'bce': -1030.811, 'kl': 10.315, 'elbo': -1041.126, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 308:	{'bce': -1030.596, 'kl': 10.328, 'elbo': -1040.924, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 309:	{'bce': -1030.649, 'kl': 10.296, 'elbo': -1040.946, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 310:	{'bce': -1031.013, 'kl': 10.321, 'elbo': -1041.335, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 311:	{'bce': -1030.599, 'kl': 10.35, 'elbo': -1040.949, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 312:	{'bce': -1030.479, 'kl': 10.367, 'elbo': -1040.846, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 313:	{'bce': -1030.343, 'kl': 10.322, 'elbo': -1040.665, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 314:	{'bce': -1030.365, 'kl': 10.315, 'elbo': -1040.68, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 315:	{'bce': -1030.578, 'kl': 10.35, 'elbo': -1040.928, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 316:	{'bce': -1030.483, 'kl': 10.304, 'elbo': -1040.787, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 317:	{'bce': -1030.002, 'kl': 10.302, 'elbo': -1040.304, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 318:	{'bce': -1030.731, 'kl': 10.323, 'elbo': -1041.054, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 319:	{'bce': -1030.333, 'kl': 10.385, 'elbo': -1040.718, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 320:	{'bce': -1029.973, 'kl': 10.343, 'elbo': -1040.316, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 321:	{'bce': -1029.801, 'kl': 10.358, 'elbo': -1040.159, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 322:	{'bce': -1029.953, 'kl': 10.292, 'elbo': -1040.246, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 323:	{'bce': -1029.72, 'kl': 10.35, 'elbo': -1040.07, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 324:	{'bce': -1029.632, 'kl': 10.319, 'elbo': -1039.952, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 325:	{'bce': -1029.872, 'kl': 10.427, 'elbo': -1040.299, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 326:	{'bce': -1030.077, 'kl': 10.306, 'elbo': -1040.383, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 327:	{'bce': -1030.477, 'kl': 10.302, 'elbo': -1040.779, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 328:	{'bce': -1030.106, 'kl': 10.344, 'elbo': -1040.45, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 329:	{'bce': -1030.31, 'kl': 10.323, 'elbo': -1040.633, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 330:	{'bce': -1029.84, 'kl': 10.298, 'elbo': -1040.138, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 331:	{'bce': -1029.373, 'kl': 10.397, 'elbo': -1039.77, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 332:	{'bce': -1029.449, 'kl': 10.333, 'elbo': -1039.782, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 333:	{'bce': -1029.035, 'kl': 10.439, 'elbo': -1039.474, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 334:	{'bce': -1029.239, 'kl': 10.349, 'elbo': -1039.588, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 335:	{'bce': -1028.958, 'kl': 10.429, 'elbo': -1039.387, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 336:	{'bce': -1029.204, 'kl': 10.443, 'elbo': -1039.648, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 337:	{'bce': -1029.462, 'kl': 10.361, 'elbo': -1039.823, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 338:	{'bce': -1029.231, 'kl': 10.415, 'elbo': -1039.646, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 339:	{'bce': -1029.149, 'kl': 10.37, 'elbo': -1039.519, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 340:	{'bce': -1028.876, 'kl': 10.405, 'elbo': -1039.28, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 341:	{'bce': -1029.04, 'kl': 10.374, 'elbo': -1039.414, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 342:	{'bce': -1028.776, 'kl': 10.36, 'elbo': -1039.136, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 343:	{'bce': -1028.821, 'kl': 10.369, 'elbo': -1039.191, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 344:	{'bce': -1029.062, 'kl': 10.394, 'elbo': -1039.455, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 345:	{'bce': -1029.679, 'kl': 10.395, 'elbo': -1040.074, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 346:	{'bce': -1029.275, 'kl': 10.421, 'elbo': -1039.696, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 347:	{'bce': -1028.784, 'kl': 10.413, 'elbo': -1039.198, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 348:	{'bce': -1028.832, 'kl': 10.404, 'elbo': -1039.236, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 349:	{'bce': -1028.712, 'kl': 10.446, 'elbo': -1039.158, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 350:	{'bce': -1028.088, 'kl': 10.489, 'elbo': -1038.577, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 351:	{'bce': -1028.346, 'kl': 10.502, 'elbo': -1038.849, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 352:	{'bce': -1028.698, 'kl': 10.428, 'elbo': -1039.126, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 353:	{'bce': -1027.976, 'kl': 10.463, 'elbo': -1038.439, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 354:	{'bce': -1028.676, 'kl': 10.373, 'elbo': -1039.049, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 355:	{'bce': -1028.116, 'kl': 10.463, 'elbo': -1038.579, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 356:	{'bce': -1028.409, 'kl': 10.486, 'elbo': -1038.895, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 357:	{'bce': -1034.277, 'kl': 10.434, 'elbo': -1044.71, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 358:	{'bce': -1031.475, 'kl': 10.359, 'elbo': -1041.834, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 359:	{'bce': -1029.598, 'kl': 10.425, 'elbo': -1040.023, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 360:	{'bce': -1029.153, 'kl': 10.362, 'elbo': -1039.515, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 361:	{'bce': -1028.949, 'kl': 10.388, 'elbo': -1039.336, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 362:	{'bce': -1028.59, 'kl': 10.495, 'elbo': -1039.085, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 363:	{'bce': -1028.805, 'kl': 10.387, 'elbo': -1039.192, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 364:	{'bce': -1028.179, 'kl': 10.451, 'elbo': -1038.629, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 365:	{'bce': -1028.336, 'kl': 10.463, 'elbo': -1038.799, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 366:	{'bce': -1028.089, 'kl': 10.481, 'elbo': -1038.57, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 367:	{'bce': -1028.315, 'kl': 10.517, 'elbo': -1038.832, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 368:	{'bce': -1027.895, 'kl': 10.46, 'elbo': -1038.355, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 369:	{'bce': -1027.833, 'kl': 10.43, 'elbo': -1038.263, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 370:	{'bce': -1028.148, 'kl': 10.423, 'elbo': -1038.571, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 371:	{'bce': -1027.86, 'kl': 10.479, 'elbo': -1038.339, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 372:	{'bce': -1027.745, 'kl': 10.496, 'elbo': -1038.241, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 373:	{'bce': -1027.31, 'kl': 10.487, 'elbo': -1037.797, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 374:	{'bce': -1027.495, 'kl': 10.496, 'elbo': -1037.99, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 375:	{'bce': -1027.452, 'kl': 10.487, 'elbo': -1037.939, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 376:	{'bce': -1027.207, 'kl': 10.512, 'elbo': -1037.718, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 377:	{'bce': -1027.08, 'kl': 10.553, 'elbo': -1037.632, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 378:	{'bce': -1027.304, 'kl': 10.46, 'elbo': -1037.764, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 379:	{'bce': -1027.178, 'kl': 10.536, 'elbo': -1037.714, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 380:	{'bce': -1027.017, 'kl': 10.544, 'elbo': -1037.562, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 381:	{'bce': -1027.176, 'kl': 10.493, 'elbo': -1037.67, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 382:	{'bce': -1027.126, 'kl': 10.579, 'elbo': -1037.705, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 383:	{'bce': -1026.88, 'kl': 10.521, 'elbo': -1037.401, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 384:	{'bce': -1026.402, 'kl': 10.557, 'elbo': -1036.959, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 385:	{'bce': -1026.837, 'kl': 10.57, 'elbo': -1037.406, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 386:	{'bce': -1027.274, 'kl': 10.494, 'elbo': -1037.767, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 387:	{'bce': -1027.04, 'kl': 10.521, 'elbo': -1037.561, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 388:	{'bce': -1026.912, 'kl': 10.493, 'elbo': -1037.405, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 389:	{'bce': -1026.696, 'kl': 10.556, 'elbo': -1037.252, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 390:	{'bce': -1026.576, 'kl': 10.588, 'elbo': -1037.164, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 391:	{'bce': -1026.107, 'kl': 10.544, 'elbo': -1036.652, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 392:	{'bce': -1026.455, 'kl': 10.601, 'elbo': -1037.055, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 393:	{'bce': -1026.56, 'kl': 10.507, 'elbo': -1037.068, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 394:	{'bce': -1026.252, 'kl': 10.578, 'elbo': -1036.83, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 395:	{'bce': -1026.458, 'kl': 10.551, 'elbo': -1037.009, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 396:	{'bce': -1026.32, 'kl': 10.539, 'elbo': -1036.858, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 397:	{'bce': -1026.322, 'kl': 10.576, 'elbo': -1036.898, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 398:	{'bce': -1026.101, 'kl': 10.527, 'elbo': -1036.628, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 399:	{'bce': -1026.262, 'kl': 10.612, 'elbo': -1036.875, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 400:	{'bce': -1026.241, 'kl': 10.567, 'elbo': -1036.808, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 401:	{'bce': -1026.481, 'kl': 10.611, 'elbo': -1037.092, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 402:	{'bce': -1026.24, 'kl': 10.631, 'elbo': -1036.871, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 403:	{'bce': -1026.003, 'kl': 10.579, 'elbo': -1036.582, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 404:	{'bce': -1026.438, 'kl': 10.594, 'elbo': -1037.032, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 405:	{'bce': -1026.12, 'kl': 10.613, 'elbo': -1036.733, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 406:	{'bce': -1026.65, 'kl': 10.586, 'elbo': -1037.237, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 407:	{'bce': -1025.781, 'kl': 10.526, 'elbo': -1036.307, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 408:	{'bce': -1025.563, 'kl': 10.666, 'elbo': -1036.229, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 409:	{'bce': -1025.82, 'kl': 10.563, 'elbo': -1036.382, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 410:	{'bce': -1026.203, 'kl': 10.552, 'elbo': -1036.755, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 411:	{'bce': -1025.707, 'kl': 10.603, 'elbo': -1036.311, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 412:	{'bce': -1025.703, 'kl': 10.594, 'elbo': -1036.296, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 413:	{'bce': -1025.99, 'kl': 10.566, 'elbo': -1036.556, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 414:	{'bce': -1025.768, 'kl': 10.6, 'elbo': -1036.369, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 415:	{'bce': -1025.746, 'kl': 10.556, 'elbo': -1036.302, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 416:	{'bce': -1025.692, 'kl': 10.636, 'elbo': -1036.328, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 417:	{'bce': -1025.701, 'kl': 10.585, 'elbo': -1036.286, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 418:	{'bce': -1025.692, 'kl': 10.63, 'elbo': -1036.322, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 419:	{'bce': -1025.635, 'kl': 10.574, 'elbo': -1036.209, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 420:	{'bce': -1025.373, 'kl': 10.684, 'elbo': -1036.057, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 421:	{'bce': -1025.469, 'kl': 10.611, 'elbo': -1036.08, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 422:	{'bce': -1025.386, 'kl': 10.573, 'elbo': -1035.958, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 423:	{'bce': -1025.861, 'kl': 10.672, 'elbo': -1036.533, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 424:	{'bce': -1025.465, 'kl': 10.579, 'elbo': -1036.044, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 425:	{'bce': -1025.086, 'kl': 10.706, 'elbo': -1035.792, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 426:	{'bce': -1025.179, 'kl': 10.625, 'elbo': -1035.803, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 427:	{'bce': -1024.964, 'kl': 10.67, 'elbo': -1035.634, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 428:	{'bce': -1024.696, 'kl': 10.629, 'elbo': -1035.325, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 429:	{'bce': -1024.803, 'kl': 10.602, 'elbo': -1035.405, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 430:	{'bce': -1024.879, 'kl': 10.644, 'elbo': -1035.524, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 431:	{'bce': -1024.554, 'kl': 10.691, 'elbo': -1035.245, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 432:	{'bce': -1024.747, 'kl': 10.672, 'elbo': -1035.419, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 433:	{'bce': -1024.583, 'kl': 10.666, 'elbo': -1035.249, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 434:	{'bce': -1024.51, 'kl': 10.661, 'elbo': -1035.172, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 435:	{'bce': -1024.726, 'kl': 10.658, 'elbo': -1035.384, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 436:	{'bce': -1024.726, 'kl': 10.665, 'elbo': -1035.391, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 437:	{'bce': -1024.97, 'kl': 10.637, 'elbo': -1035.606, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 438:	{'bce': -1024.437, 'kl': 10.701, 'elbo': -1035.138, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 439:	{'bce': -1024.353, 'kl': 10.625, 'elbo': -1034.979, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 440:	{'bce': -1024.609, 'kl': 10.677, 'elbo': -1035.285, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 441:	{'bce': -1024.556, 'kl': 10.672, 'elbo': -1035.228, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 442:	{'bce': -1024.346, 'kl': 10.72, 'elbo': -1035.066, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 443:	{'bce': -1024.757, 'kl': 10.622, 'elbo': -1035.38, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 444:	{'bce': -1024.306, 'kl': 10.689, 'elbo': -1034.995, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 445:	{'bce': -1024.629, 'kl': 10.726, 'elbo': -1035.355, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 446:	{'bce': -1024.541, 'kl': 10.639, 'elbo': -1035.18, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 447:	{'bce': -1024.258, 'kl': 10.67, 'elbo': -1034.928, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 448:	{'bce': -1024.067, 'kl': 10.759, 'elbo': -1034.826, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 449:	{'bce': -1024.442, 'kl': 10.696, 'elbo': -1035.137, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 450:	{'bce': -1024.991, 'kl': 10.689, 'elbo': -1035.681, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 451:	{'bce': -1024.249, 'kl': 10.634, 'elbo': -1034.883, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 452:	{'bce': -1024.051, 'kl': 10.712, 'elbo': -1034.763, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 453:	{'bce': -1024.027, 'kl': 10.708, 'elbo': -1034.735, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 454:	{'bce': -1023.756, 'kl': 10.667, 'elbo': -1034.423, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 455:	{'bce': -1023.412, 'kl': 10.738, 'elbo': -1034.151, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 456:	{'bce': -1024.056, 'kl': 10.646, 'elbo': -1034.702, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 457:	{'bce': -1023.831, 'kl': 10.71, 'elbo': -1034.541, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 458:	{'bce': -1023.941, 'kl': 10.705, 'elbo': -1034.647, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 459:	{'bce': -1023.501, 'kl': 10.73, 'elbo': -1034.23, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 460:	{'bce': -1023.661, 'kl': 10.768, 'elbo': -1034.429, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 461:	{'bce': -1024.067, 'kl': 10.78, 'elbo': -1034.847, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 462:	{'bce': -1023.493, 'kl': 10.748, 'elbo': -1034.241, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 463:	{'bce': -1023.623, 'kl': 10.706, 'elbo': -1034.329, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 464:	{'bce': -1023.402, 'kl': 10.785, 'elbo': -1034.186, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 465:	{'bce': -1023.408, 'kl': 10.794, 'elbo': -1034.202, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 466:	{'bce': -1023.401, 'kl': 10.72, 'elbo': -1034.121, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 467:	{'bce': -1023.291, 'kl': 10.813, 'elbo': -1034.104, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 468:	{'bce': -1023.979, 'kl': 10.739, 'elbo': -1034.718, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 469:	{'bce': -1023.947, 'kl': 10.734, 'elbo': -1034.681, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 470:	{'bce': -1024.23, 'kl': 10.695, 'elbo': -1034.924, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 471:	{'bce': -1023.935, 'kl': 10.781, 'elbo': -1034.716, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 472:	{'bce': -1023.368, 'kl': 10.689, 'elbo': -1034.056, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 473:	{'bce': -1023.342, 'kl': 10.741, 'elbo': -1034.084, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 474:	{'bce': -1022.945, 'kl': 10.799, 'elbo': -1033.745, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 475:	{'bce': -1022.967, 'kl': 10.737, 'elbo': -1033.704, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 476:	{'bce': -1023.131, 'kl': 10.784, 'elbo': -1033.915, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 477:	{'bce': -1023.181, 'kl': 10.756, 'elbo': -1033.936, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 478:	{'bce': -1022.74, 'kl': 10.74, 'elbo': -1033.48, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 479:	{'bce': -1023.21, 'kl': 10.736, 'elbo': -1033.946, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 480:	{'bce': -1023.945, 'kl': 10.762, 'elbo': -1034.707, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 481:	{'bce': -1025.645, 'kl': 10.764, 'elbo': -1036.409, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 482:	{'bce': -1024.715, 'kl': 10.621, 'elbo': -1035.336, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 483:	{'bce': -1023.461, 'kl': 10.73, 'elbo': -1034.192, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 484:	{'bce': -1023.295, 'kl': 10.79, 'elbo': -1034.085, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 485:	{'bce': -1023.34, 'kl': 10.698, 'elbo': -1034.038, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 486:	{'bce': -1023.047, 'kl': 10.84, 'elbo': -1033.887, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 487:	{'bce': -1023.045, 'kl': 10.798, 'elbo': -1033.843, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 488:	{'bce': -1022.693, 'kl': 10.775, 'elbo': -1033.469, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 489:	{'bce': -1022.591, 'kl': 10.854, 'elbo': -1033.445, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 490:	{'bce': -1022.441, 'kl': 10.788, 'elbo': -1033.23, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 491:	{'bce': -1022.603, 'kl': 10.789, 'elbo': -1033.392, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 492:	{'bce': -1022.605, 'kl': 10.765, 'elbo': -1033.37, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 493:	{'bce': -1022.616, 'kl': 10.808, 'elbo': -1033.424, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 494:	{'bce': -1022.627, 'kl': 10.792, 'elbo': -1033.419, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 495:	{'bce': -1022.674, 'kl': 10.775, 'elbo': -1033.448, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 496:	{'bce': -1023.092, 'kl': 10.792, 'elbo': -1033.884, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 497:	{'bce': -1022.55, 'kl': 10.82, 'elbo': -1033.37, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 498:	{'bce': -1022.768, 'kl': 10.797, 'elbo': -1033.566, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+	TrainEpoch 499:	{'bce': -1022.564, 'kl': 10.772, 'elbo': -1033.336, 'll': 0.0, 'mi': 0.0, 'cov_norm': 0.0, 'beta': 1.0, 'comp_000_r2/curvature': -2.0, 'comp_001_r2/curvature': -2.0}
+
+Saving embeddings
+r2 3
+r2 3
