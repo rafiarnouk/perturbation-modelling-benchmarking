@@ -1,3 +1,6 @@
 .DS_Store
 data/*
-!data/.gitkeep
+!data/preprocessed/
+data/preprocessed/*
+!data/preprocessed/.gitkeep
+__pycache__/

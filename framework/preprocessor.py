@@ -1,17 +1,23 @@
 import scanpy as sc
 import argparse
+from utils import get_random_split
+from pathlib import Path
+import scanpy as sc
 
 def main():
     # parse command-line argument
     parser = argparse.ArgumentParser(description="Preprocess and clean dataset")
     parser.add_argument("dataset", type=str, help="Name of the dataset (e.g. 'adamson')")
+    parser.add_argument("--split", action="store_true", help="If --split included, export train/test/val splits")
     args = parser.parse_args()
 
     dataset = args.dataset
+    should_split = args.split
+    data_path = str(Path(__file__).parent.parent / "data")
 
     # read dataset
     print(f"Reading dataset {dataset}")
-    adata = sc.read(f"../data/{dataset}.h5ad")
+    adata = sc.read(f"{data_path}/{dataset}.h5ad")
 
     # feature selection and normalization
     print("Preprocessing and cleaning data")
@@ -27,8 +33,16 @@ def main():
     adata = adata[~adata.obs["perturbation"].isna() & (adata.obs["perturbation"] != "*")].copy()
 
     # save updated adata object
-    print("Saving to data folder")
-    sc.write(f"../data/{dataset}_preprocessed.h5ad", adata)
+    write_path = f"{data_path}/preprocessed"
+    if should_split:
+        split = {"train": 0.7, "val": 0.15, "test": 0.15}
+        adata_train, adata_val, adata_test = get_random_split(adata, split)
+        print("Saving data")
+        sc.write(f"{write_path}/{dataset}_train.h5ad", adata_train)
+        sc.write(f"{write_path}/{dataset}_val.h5ad", adata_val)
+        sc.write(f"{write_path}/{dataset}_test.h5ad", adata_test)
+    else:
+        sc.write(f"{write_path}/{dataset}_preprocessed.h5ad", adata)
 
 if __name__ == "__main__":
     main()
