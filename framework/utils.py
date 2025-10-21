@@ -1,7 +1,7 @@
 import scanpy as sc
 import random
 
-def get_random_split(adata, split):
+def assign_splits(adata, split):
     # figure out how many perts to put in each split
     perts = list(adata.obs["perturbation"].unique())
     n_perts_train, n_perts_val, n_perts_test = split_by_percentages(len(perts), list(split.values()))
@@ -15,12 +15,10 @@ def get_random_split(adata, split):
 
     print(f"Splitting {len(perts)} perts: {perts_train=}, {perts_val=}, {perts_test=}")
 
-    # segment data and save
-    adata_train = adata[adata.obs["perturbation"].isin(perts_train)].copy()
-    adata_val = adata[adata.obs["perturbation"].isin(perts_val)].copy()
-    adata_test = adata[adata.obs["perturbation"].isin(perts_test)].copy()
-
-    return adata_train, adata_val, adata_test
+    # segment data
+    adata.obs.loc[adata.obs["perturbation"].isin(perts_train), "split"] = "train"
+    adata.obs.loc[adata.obs["perturbation"].isin(perts_val), "split"] = "val"
+    adata.obs.loc[adata.obs["perturbation"].isin(perts_test), "split"] = "test"
 
 # ChatGPT generated
 def split_by_percentages(N, percentages):
