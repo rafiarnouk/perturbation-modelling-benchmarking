@@ -2,3 +2,4 @@ A repository to store utility functions and any other general code related to th
 
 Datasets can be found at https://projects.sanderlab.org/scperturb/datavzrd/scPerturb_vzrd_v1/dataset_info/index_1.html
 * `norman.h5ad` is NormanWeissman2019 with 237 perturbations
+* `adamson.h5ad` is AdamsonWeissman2016 with 20 perturbations
