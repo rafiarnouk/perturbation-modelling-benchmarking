@@ -3,6 +3,7 @@ import argparse
 from utils import get_random_split
 from pathlib import Path
 import scanpy as sc
+import re
 
 def main():
     # parse command-line argument
@@ -31,6 +32,9 @@ def main():
 
     # remove irrelevant rows
     adata = adata[~adata.obs["perturbation"].isna() & (adata.obs["perturbation"] != "*")].copy()
+
+    # remove control perturbations
+    adata = adata[~adata.obs["perturbation"].str.contains(r"ctrl|control", flags=re.IGNORECASE, na=False)].copy()
 
     # save updated adata object
     write_path = f"{data_path}/preprocessed"

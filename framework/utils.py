@@ -13,7 +13,7 @@ def get_random_split(adata, split):
     perts_val = perts[n_perts_train:n_perts_train + n_perts_val]
     perts_test = perts[n_perts_train + n_perts_val:n_perts_train + n_perts_val + n_perts_test]
 
-    print(perts_train, perts_val, perts_test)
+    print(f"Splitting {len(perts)} perts: {perts_train=}, {perts_val=}, {perts_test=}")
 
     # segment data and save
     adata_train = adata[adata.obs["perturbation"].isin(perts_train)].copy()
