@@ -1,6 +1,7 @@
 import scanpy as sc
 import random
 
+# annotates adata object to include split (either train/val/test)
 def assign_splits(adata, split):
     # figure out how many perts to put in each split
     perts = list(adata.obs["perturbation"].unique())
@@ -20,7 +21,16 @@ def assign_splits(adata, split):
     adata.obs.loc[adata.obs["perturbation"].isin(perts_val), "split"] = "val"
     adata.obs.loc[adata.obs["perturbation"].isin(perts_test), "split"] = "test"
 
-# ChatGPT generated
+# returns dictionary mapping perturbations found in adata object to genes being perturbed
+def get_perturbed_genes_map(adata, separator="_"):
+    perts = list(adata.obs["perturbation"].unique())
+    pert_map = {}
+    for pert in perts:
+        pert_split = [gene for gene in pert.split(separator)[:-1] if gene != 'only']
+        pert_map[pert] = pert_split
+    return pert_map
+
+# AI generated
 def split_by_percentages(N, percentages):
     """
     Split a total number N into parts based on given percentages.

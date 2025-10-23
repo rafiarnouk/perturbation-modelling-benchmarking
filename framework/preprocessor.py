@@ -1,6 +1,6 @@
 import scanpy as sc
 import argparse
-from utils import assign_splits
+from utils import assign_splits, get_perturbed_genes_map
 from pathlib import Path
 import scanpy as sc
 import re
@@ -26,6 +26,8 @@ def main():
     adata.layers["counts"] = adata.X.copy()
     sc.pp.normalize_total(adata)
     sc.pp.log1p(adata)
+    if "log1p" in adata.uns:  # remove adata.uns["log1p"] = {"base": None} since this causes problem when reading in earlier anndata versions
+        del adata.uns["log1p"]
     sc.pp.highly_variable_genes(adata, flavor="seurat_v3", n_top_genes=2000, layer="counts")
     adata = adata[:,adata.var["highly_variable"]]
 
@@ -34,6 +36,11 @@ def main():
 
     # remove control perturbations
     adata = adata[~adata.obs["perturbation"].str.contains(r"ctrl|control", flags=re.IGNORECASE, na=False)].copy()
+
+    # remove combinatorial perturbations
+    pert_map = get_perturbed_genes_map(adata)
+    single_perts = [pert for pert, genes in pert_map.items() if len(genes) == 1]
+    adata = adata[adata.obs["perturbation"].isin(single_perts)].copy()
 
     # assign train/val/test splits
     if should_split:
