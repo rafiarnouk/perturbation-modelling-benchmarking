@@ -1,10 +1,13 @@
 import scanpy as sc
 import random
+import re
 
 # annotates adata object to include split (either train/val/test)
-def assign_splits(adata, split):
+def assign_splits(adata, split, exclude_ctrl=False):
     # figure out how many perts to put in each split
-    perts = list(adata.obs["perturbation"].unique())
+    unique_perts = list(adata.obs["perturbation"].unique())
+    perts = [pert for pert in unique_perts if not re.search(r"ctrl|control", pert, flags=re.IGNORECASE)]
+    ctrls = [pert for pert in unique_perts if re.search(r"ctrl|control", pert, flags=re.IGNORECASE)]
     n_perts_train, n_perts_val, n_perts_test = split_by_percentages(len(perts), list(split.values()))
     assert(len(perts) == n_perts_train + n_perts_val + n_perts_test)
 
@@ -14,7 +17,11 @@ def assign_splits(adata, split):
     perts_val = perts[n_perts_train:n_perts_train + n_perts_val]
     perts_test = perts[n_perts_train + n_perts_val:n_perts_train + n_perts_val + n_perts_test]
 
-    print(f"Splitting {len(perts)} perts: {perts_train=}, {perts_val=}, {perts_test=}")
+    # conditionally add controls to train split
+    if not exclude_ctrl:
+        perts_train.extend(ctrls)
+
+    print(f"Splitting {len(perts)} perts and {len(ctrls)} controls: {perts_train=}, {perts_val=}, {perts_test=}")
 
     # segment data
     adata.obs.loc[adata.obs["perturbation"].isin(perts_train), "split"] = "train"
