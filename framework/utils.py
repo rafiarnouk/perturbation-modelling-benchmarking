@@ -67,13 +67,9 @@ def assign_splits_proportional(adata, split, seed=0):
     train_target -= sum(ctrl_counts.values())
     prob_train = train_target / (train_target + val_target)
 
-    # mask for rows not in test
+    # randomly assign remaining cells to train or test
     mask_rest = adata.obs["split"].isna()
-
-    # generate random numbers for remaining rows
     rand_vals = np.random.rand(mask_rest.sum())
-
-    # assign train/val based on probability x
     adata.obs.loc[mask_rest, "split"] = np.where(rand_vals < prob_train, "train", "val")
 
 # returns dictionary mapping perturbations found in adata object to genes being perturbed

@@ -1,6 +1,6 @@
 import scanpy as sc
 import argparse
-from utils import assign_splits, get_perturbed_genes_map
+from utils import assign_splits, assign_splits_proportional, get_perturbed_genes_map
 from pathlib import Path
 import scanpy as sc
 import re
@@ -10,11 +10,9 @@ def main():
     parser = argparse.ArgumentParser(description="Preprocess and clean dataset")
     parser.add_argument("dataset", type=str, help="Name of the dataset (e.g. 'adamson')")
     parser.add_argument("--split", action="store_true", help="If --split included, export train/test/val splits")
-    parser.add_argument("--exclude_ctrl", action="store_true", help="If --exclude_ctrl included, leave ctrl pert out of train split")
     args = parser.parse_args()
     dataset = args.dataset
     should_split = args.split
-    exclude_ctrl = args.exclude_ctrl
     data_path = str(Path(__file__).parent.parent / "data")
 
     # read dataset
@@ -36,9 +34,8 @@ def main():
     # remove irrelevant rows
     adata = adata[~adata.obs["perturbation"].isna() & (adata.obs["perturbation"] != "*")].copy()
 
-    # conditionally remove control perturbations (3x_neg_ctrl_pMJ144-1', '3x_neg_ctrl_pMJ144-2')
-    if exclude_ctrl:
-        adata = adata[~adata.obs["perturbation"].str.contains(r"ctrl|control", flags=re.IGNORECASE, na=False)].copy()
+    # conditionally remove control perturbations
+    adata = adata[~adata.obs["perturbation"].str.contains(r"ctrl|control", flags=re.IGNORECASE, na=False)].copy()
 
     # remove combinatorial perturbations (keep control perturbations if they are still in the data)
     pert_map = get_perturbed_genes_map(adata)
@@ -48,7 +45,13 @@ def main():
     # assign train/val/test splits
     if should_split:
         split = {"train": 0.7, "val": 0.15, "test": 0.15}
-        assign_splits(adata, split, exclude_ctrl)
+        assign_splits_proportional(adata, split)
+
+    print(adata.obs["perturbation"].value_counts())
+    print(adata.obs["split"].value_counts())
+    print("perts in train", list(adata.obs.loc[adata.obs["split"] == "train", "perturbation"].unique()))
+    print("perts in test", list(adata.obs.loc[adata.obs["split"] == "test", "perturbation"].unique()))
+    print("perts in val", list(adata.obs.loc[adata.obs["split"] == "val", "perturbation"].unique()))
 
     # save updated adata object
     write_path = f"{data_path}/preprocessed"
