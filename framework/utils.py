@@ -30,8 +30,7 @@ def assign_splits(adata, split, exclude_ctrl=False):
     adata.obs.loc[adata.obs["perturbation"].isin(perts_test), "split"] = "test"
 
 # not super robust, will fix if need arises
-def assign_splits_proportional(adata, split, seed=0):
-    random.seed(seed)
+def assign_splits_proportional(adata, split):
     unique_perts_counts = adata.obs["perturbation"].value_counts().to_dict()
     pert_counts = {pert: count for pert, count in unique_perts_counts.items() if not re.search(r"ctrl|control", pert, flags=re.IGNORECASE)}
     ctrl_counts = {pert: count for pert, count in unique_perts_counts.items() if re.search(r"ctrl|control", pert, flags=re.IGNORECASE)}
@@ -52,7 +51,7 @@ def assign_splits_proportional(adata, split, seed=0):
         index = possible_test_perts.index(chosen_pert)
         possible_test_perts.pop(index)
         test_pert_weights.pop(index)
-        print(f"chose {chosen_pert}, so now {test_perts_count=}")
+        print(f"chose {chosen_pert} for testing, so now {test_perts_count=}")
     
     # assign test perts
     adata.obs.loc[adata.obs["perturbation"].isin(perts_test), "split"] = "test"
