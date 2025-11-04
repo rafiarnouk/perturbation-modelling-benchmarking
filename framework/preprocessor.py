@@ -1,6 +1,5 @@
 import scanpy as sc
 import argparse
-import scanpy as sc
 import re
 import random
 import numpy as np
