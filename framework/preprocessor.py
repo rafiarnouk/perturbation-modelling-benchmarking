@@ -40,9 +40,6 @@ def main():
     # remove irrelevant rows
     adata = adata[~adata.obs["perturbation"].isna() & (adata.obs["perturbation"] != "*")].copy()
 
-    # conditionally remove control perturbations
-    adata = adata[~adata.obs["perturbation"].str.contains(r"ctrl|control", flags=re.IGNORECASE, na=False)].copy()
-
     # remove combinatorial perturbations (keep control perturbations if they are still in the data)
     pert_map = get_perturbed_genes_map(adata)
     single_perts = [pert for pert, genes in pert_map.items() if len(genes) == 1 or re.search(r"ctrl|control", pert, flags=re.IGNORECASE)]
