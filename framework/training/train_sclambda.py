@@ -19,7 +19,6 @@ parser.add_argument("--path_to_model", type=str, required=True)
 parser.add_argument("--path_to_results", type=str, required=True)
 parser.add_argument("--dataset_name", type=str, required=True)
 parser.add_argument("--trial_number", type=int, required=True)
-parser.add_argument("--small_run", action="store_true", required=False)
 args = parser.parse_args()
 
 path_to_adata = args.path_to_adata
@@ -28,7 +27,6 @@ path_to_model = args.path_to_model
 path_to_results = args.path_to_results
 dataset_name = args.dataset_name
 trial_number = args.trial_number
-small_run = args.small_run
 
 # example usage: 
 """
@@ -38,8 +36,7 @@ python train_sclambda.py \
   --path_to_model /scratch/st-jiaruid-1/rarnou01/models_Normal_split0 \
   --path_to_results /scratch/st-jiaruid-1/rarnou01/results \
   --dataset_name adamson \
-  --trial_number 0 \
-  --small_run
+  --trial_number 0
 """
 
 # read data
@@ -86,13 +83,10 @@ if dataset_name == "adamson":
 else:
     raise RuntimeError("no prep method for dataset provided")
 
-# if we are doing a small test run, only run for 10 epochs (model breaks if epochs < 10)
-small_run_args = {"training_epochs": 10} if small_run else {}
 model = sclambda.model.Model(adata,
                              gene_embeddings,
                              model_path = path_to_model,
-                             multi_gene = False,
-                             **small_run_args)
+                             multi_gene = False)
 model.train()
 print("Exited model training")
 
