@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 def main():
-    # parse command-line argument
+    # parse command-line arguments
     parser = argparse.ArgumentParser(description="Preprocess and clean dataset")
     parser.add_argument("dataset", type=str, help="Name of the dataset (e.g. 'adamson')")
     parser.add_argument("--split", action="store_true", help="If --split included, export train/test/val splits")
