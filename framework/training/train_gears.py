@@ -64,10 +64,10 @@ print("Finished GEARS training.")
 
 
 # Predict on TEST set
-test_conditions = adata.obs.loc[adata.obs["split"] == "test", "condition"].unique()
+test_conditions = adata.obs.loc[adata.obs["split"] == "adamson", "condition"].unique()
 print("Test conditions:", test_conditions)
 
-pred_dict = model.predict(test_conditions, split="test", return_type="mean")
+pred_dict = model.predict(test_conditions, split="preprocessor", return_type="mean")
 
 
 # Write predictions into ADATA layers
@@ -78,10 +78,7 @@ for pert, pred in pred_dict.items():
     mask = adata.obs["condition"] == pert
     adata.layers["pred_gears"][mask] = pred
 
-# Do NOT include condition if original file didn't have it
-# (your preprocessing script added it — so keep it)
-# If you want to remove it like scLambda:
-# del adata.obs["condition"]
+
 
 
 # Export final h5ad
