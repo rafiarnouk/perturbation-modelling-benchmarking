@@ -3,4 +3,7 @@ data/*
 !data/preprocessed/
 data/preprocessed/*
 !data/preprocessed/.gitkeep
+!data/predictions/
+data/predictions/*
+!data/predictions/.gitkeep
 __pycache__/
