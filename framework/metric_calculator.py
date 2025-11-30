@@ -9,6 +9,12 @@ python metric_calculator.py \
   --preds_files adamson_pred_sclambda_0 adamson_pred_sclambda_1 adamson_pred_sclambda_2 \
   --metrics pearson \
   --preds_layer_name pred_sclambda
+
+for baselines:
+python metric_calculator.py \
+  --preds_files adamson_pred_baseline_0 adamson_pred_baseline_1 adamson_pred_baseline_2 \
+  --metrics pearson \
+  --preds_layer_name pred_baseline_mean
 """
 
 def main():
