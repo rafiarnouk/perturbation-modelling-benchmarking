@@ -12,6 +12,8 @@ import gears.gears as gears_gears
 import gears.inference as gears_inference
 import torch.nn.functional as F
 from scipy.stats import pearsonr as orig_pearsonr
+import warnings
+warnings.filterwarnings(action="ignore")
 
 def loss_all_genes(pred, y, *args, **kwargs):
     return F.mse_loss(pred, y)
@@ -63,7 +65,6 @@ print("Loaded ADATA:", adata)
 if "condition" not in adata.obs:
     if "perturbation" in adata.obs:
         adata.obs["condition"] = adata.obs["perturbation"].copy()
-        print("Created 'condition' column from 'perturbation'.")
     else:
         raise RuntimeError(
             "ERROR: need either 'condition' or 'perturbation' in adata.obs for GEARS."
@@ -72,14 +73,11 @@ if "condition" not in adata.obs:
 if "cell_type" not in adata.obs:
     if "celltype" in adata.obs:
         adata.obs["cell_type"] = adata.obs["celltype"].copy()
-        print("Created 'cell_type' column from 'celltype'.")
     else:
         adata.obs["cell_type"] = "celltype_0"
-        print("Set 'cell_type' to a constant label 'celltype_0'.")
 
 if "gene_name" not in adata.var:
     adata.var["gene_name"] = adata.var_names
-    print("Created 'gene_name' column from var_names.")
 
 if "split" not in adata.obs:
     raise RuntimeError("adata.obs must contain 'split' column (train/val/test).")
@@ -140,33 +138,36 @@ model.model_initialize()
 
 os.makedirs(path_to_model, exist_ok=True)
 
-print("Starting GEARS training...")
-model.train(epochs=5)
+print("Starting")
+model.train(epochs=1)
 model.save_model(path_to_model)
-print("Finished GEARS training.")
+print("Finished")
 
 #Prediction on test conditions
 
 test_conditions = pd_obj.set2conditions.get("test", [])
-print("Test conditions (from GEARS):", test_conditions)
+print("Raw test conditions from GEARS:", test_conditions)
 
-# Keep only perturbations that are actually in the GEARS perturbation graph
-valid_test_conditions = [p for p in test_conditions if p in model.pert_list]
-print("Valid test conditions in GEARS graph:", valid_test_conditions)
+pred_dict = {}
 
-if len(valid_test_conditions) == 0:
-    print("Warning: no valid test conditions found in GEARS.pert_list skipping prediction.")
-    pred_dict = {}
-else:
-    pred_dict = model.predict(valid_test_conditions)
+for cond in test_conditions:
+    try:
+        out = model.predict([cond]) 
+        if cond in out:
+            pred_dict[cond] = out[cond]
+        else:
+            print(f"Warning: GEARS.predict did not return key {cond}, skipping.")
+    except ValueError as e:
+        print(f"Skipping {cond} due to GEARS error: {e}")
 
 n_cells, n_genes = adata.n_obs, adata.n_vars
 adata.layers["pred_gears"] = np.full((n_cells, n_genes), np.nan, dtype=float)
 
-for pert, pred in pred_dict.items():
-    mask = adata.obs["condition"] == pert
+for cond, pred in pred_dict.items():
+    mask = adata.obs["condition"] == cond
     adata.layers["pred_gears"][mask] = pred
 
+os.makedirs(path_to_results, exist_ok=True)
 output_path = f"{path_to_results}/{dataset_name}_pred_gears_{trial_number}.h5ad"
 print("Exporting to:", output_path)
 sc.write(output_path, adata)
