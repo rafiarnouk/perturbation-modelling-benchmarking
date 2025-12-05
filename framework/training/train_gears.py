@@ -12,8 +12,8 @@ import gears.gears as gears_gears
 import gears.inference as gears_inference
 import torch.nn.functional as F
 from scipy.stats import pearsonr as orig_pearsonr
-import warnings
-warnings.filterwarnings(action="ignore")
+
+#for errors in adamson
 
 def loss_all_genes(pred, y, *args, **kwargs):
     return F.mse_loss(pred, y)
@@ -34,14 +34,14 @@ def safe_deeper_analysis(adata, test_res):
 
 gears_inference.deeper_analysis = safe_deeper_analysis
 gears_gears.deeper_analysis = safe_deeper_analysis
+
 def safe_non_dropout_analysis(adata, test_res):
     return None, None
 
 gears_inference.non_dropout_analysis = safe_non_dropout_analysis
 gears_gears.non_dropout_analysis = safe_non_dropout_analysis
 
-
-#Argument parser
+#parse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--path_to_adata", type=str, required=True)
@@ -57,8 +57,7 @@ path_to_results = args.path_to_results
 dataset_name = args.dataset_name
 trial_number = args.trial_number
 
-#Load and prepare AnnData
-
+#Load AnnData & basic columns 
 adata = sc.read(path_to_adata)
 print("Loaded ADATA:", adata)
 
@@ -66,9 +65,7 @@ if "condition" not in adata.obs:
     if "perturbation" in adata.obs:
         adata.obs["condition"] = adata.obs["perturbation"].copy()
     else:
-        raise RuntimeError(
-            "ERROR: need either 'condition' or 'perturbation' in adata.obs for GEARS."
-        )
+        raise RuntimeError("Need either 'condition' or 'perturbation' in adata.obs for GEARS.")
 
 if "cell_type" not in adata.obs:
     if "celltype" in adata.obs:
@@ -82,7 +79,8 @@ if "gene_name" not in adata.var:
 if "split" not in adata.obs:
     raise RuntimeError("adata.obs must contain 'split' column (train/val/test).")
 
-# Base non_zeros_gene_idx on all conditions (good default)
+# non_zeros_gene_idx for GEARS 
+
 conditions = adata.obs["condition"].unique().tolist()
 n_genes = adata.n_vars
 mapping = {}
@@ -103,7 +101,7 @@ for c in conditions:
 
 adata.uns["non_zeros_gene_idx"] = mapping
 
-#GEARS PertData + custom split
+# GEARS PertData + custom split
 
 gears_root = os.path.join(os.path.dirname(path_to_adata), "gears_cache")
 os.makedirs(gears_root, exist_ok=True)
@@ -139,31 +137,39 @@ model.model_initialize()
 os.makedirs(path_to_model, exist_ok=True)
 
 print("Starting")
-model.train(epochs=1)
+model.train(epochs=5)   
 model.save_model(path_to_model)
 print("Finished")
 
-#Prediction on test conditions
+#Prediction on test conditions 
 
 test_conditions = pd_obj.set2conditions.get("test", [])
 print("Raw test conditions from GEARS:", test_conditions)
 
-pred_dict = {}
+model_perts = list(model.pert_list)
+condition_to_modelname = {}
+requested_pert_for_model = []
 
 for cond in test_conditions:
-    try:
-        out = model.predict([cond]) 
-        if cond in out:
-            pred_dict[cond] = out[cond]
-        else:
-            print(f"Warning: GEARS.predict did not return key {cond}, skipping.")
-    except ValueError as e:
-        print(f"Skipping {cond} due to GEARS error: {e}")
+    base = cond.split("_")[0]
+    if base in model_perts:
+        condition_to_modelname[cond] = base
+        requested_pert_for_model.append(base)
+
+requested_pert_for_model = list(dict.fromkeys(requested_pert_for_model))
+print("Perturbations we'll actually request from GEARS:", requested_pert_for_model)
+
+pred_dict = {}
+if requested_pert_for_model:
+    pred_dict = model.predict(requested_pert_for_model)
 
 n_cells, n_genes = adata.n_obs, adata.n_vars
 adata.layers["pred_gears"] = np.full((n_cells, n_genes), np.nan, dtype=float)
 
-for cond, pred in pred_dict.items():
+for cond, modelname in condition_to_modelname.items():
+    if modelname not in pred_dict:
+        continue
+    pred = pred_dict[modelname]
     mask = adata.obs["condition"] == cond
     adata.layers["pred_gears"][mask] = pred
 
