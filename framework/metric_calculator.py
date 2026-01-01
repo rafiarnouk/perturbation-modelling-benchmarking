@@ -7,12 +7,14 @@ import numpy as np
 """
 python metric_calculator.py \
   --preds_files adamson_pred_sclambda_0 adamson_pred_sclambda_1 adamson_pred_sclambda_2 \
+  --path_to_preds /scratch/st-jiaruid-1/rarnou01/results \
   --metrics pearson \
   --preds_layer_name pred_sclambda
 
 for baselines:
 python metric_calculator.py \
   --preds_files adamson_pred_baseline_0 adamson_pred_baseline_1 adamson_pred_baseline_2 \
+  --path_to_preds /scratch/st-jiaruid-1/rarnou01/results \
   --metrics pearson \
   --preds_layer_name pred_baseline_mean
 """
@@ -20,17 +22,19 @@ python metric_calculator.py \
 def main():
     parser = argparse.ArgumentParser(description="Preprocess and clean dataset")
     parser.add_argument("--preds_files", nargs="*", type=str, help="Names of the files (should be in data/predictions)")
+    parser.add_argument("--path_to_preds", type=str, help="Path to folder containing adata objects with predictions")
     parser.add_argument("--metrics", nargs="*", type=str, default=["pearson"], help="Metrics to calculate")
     parser.add_argument("--preds_layer_name", type=str, default=["pred"], help="Name of the predictions layer in the adata object")
     args = parser.parse_args()
     files = args.preds_files
+    path_to_preds = args.path_to_preds
     metrics = args.metrics
     preds_layer_name = args.preds_layer_name
 
     metric_dict = {metric: [] for metric in metrics}
 
     for split_number, file in enumerate(files):
-        adata = sc.read(f"../data/predictions/{file}.h5ad")
+        adata = sc.read(f"{path_to_preds}/{file}.h5ad")
         test_rows = ~np.all(np.isnan(adata.layers[preds_layer_name]), axis=1)
         actual = adata.X.toarray()[test_rows]
         pred = adata.layers[preds_layer_name][test_rows]
