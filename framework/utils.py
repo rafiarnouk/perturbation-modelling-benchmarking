@@ -72,11 +72,14 @@ def assign_splits_proportional(adata, split):
     adata.obs.loc[mask_rest, "split"] = np.where(rand_vals < prob_train, "train", "val")
 
 # returns dictionary mapping perturbations found in adata object to genes being perturbed
-def get_perturbed_genes_map(adata, separator="_"):
+def get_perturbed_genes_map(adata, separator="_", remove_metadata_tag=False):
     perts = list(adata.obs["perturbation"].unique())
     pert_map = {}
     for pert in perts:
-        pert_split = [gene for gene in pert.split(separator)[:-1] if gene != 'only']
+        if remove_metadata_tag:
+            pert_split = [gene for gene in pert.split(separator)[:-1] if gene != 'only']
+        else:
+            pert_split = [gene for gene in pert.split(separator) if gene != 'only']
         pert_map[pert] = pert_split
     return pert_map
 

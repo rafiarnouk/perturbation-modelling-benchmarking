@@ -46,7 +46,8 @@ def main():
         adata = adata[~adata.obs["perturbation"].isna() & (adata.obs["perturbation"] != "*")].copy()
 
         # remove combinatorial perturbations (keep control perturbations if they are still in the data)
-        pert_map = get_perturbed_genes_map(adata)
+        remove_metadata_tag = dataset == "adamson"
+        pert_map = get_perturbed_genes_map(adata, remove_metadata_tag=remove_metadata_tag)
         single_perts = [pert for pert, genes in pert_map.items() if len(genes) == 1 or re.search(r"ctrl|control", pert, flags=re.IGNORECASE)]
         adata = adata[adata.obs["perturbation"].isin(single_perts)].copy()
 
