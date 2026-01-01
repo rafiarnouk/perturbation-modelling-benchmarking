@@ -8,7 +8,9 @@ from pathlib import Path
 
 # example usage:
 """
-python preprocessor.py adamson --split --seeds 0 1 2
+python preprocessor.py adamson --split \
+  --seeds 0 1 2 \
+  --write_path /scratch/st-jiaruid-1/rarnou01/preprocessed
 """
 
 def main():
@@ -17,10 +19,12 @@ def main():
     parser.add_argument("dataset", type=str, help="Name of the dataset (e.g. 'adamson')")
     parser.add_argument("--split", action="store_true", help="If --split included, export train/test/val splits")
     parser.add_argument("--seeds", nargs="*", type=int, default=0, help="Random seeds, 1 for each trial")
+    parser.add_argument("--write_path", type=str, help="Path to folder to put preprocessed data in")
     args = parser.parse_args()
     dataset = args.dataset
     should_split = args.split
     seeds = args.seeds
+    write_path = args.write_path
     for seed in seeds:
         random.seed(seed)
         np.random.seed(seed)
@@ -63,8 +67,7 @@ def main():
         print("perts in val", list(adata.obs.loc[adata.obs["split"] == "val", "perturbation"].unique()))
 
         # save updated adata object
-        write_path = f"{data_path}/preprocessed"
-        print("Saving data")
+        print(f"Saving data to {write_path}")
         sc.write(f"{write_path}/{dataset}_preprocessed_{seed}.h5ad", adata)
 
 if __name__ == "__main__":
