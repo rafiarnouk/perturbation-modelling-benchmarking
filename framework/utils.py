@@ -187,4 +187,15 @@ def compute_degs(adata, mode='vsrest', pval_threshold=0.05):
     adata.uns[f'rank_genes_groups_{mode}'] = adata_subset.uns['rank_genes_groups'].copy()
     
     return adata_subset.uns['rank_genes_groups']
+
+def is_control(pert):
+    return re.search(r"ctrl|control", pert, flags=re.IGNORECASE) is not None
+
+def pseudobulk_means(adata, pert, pert_mask, pred_layer):
+    mask = (adata.obs["perturbation"] == pert).values & pert_mask
+
+    mu_p = adata.X[mask].mean(axis=0)
+    mu_p_hat = adata.layers[pred_layer][mask].mean(axis=0)
+
+    return mu_p, mu_p_hat
     
