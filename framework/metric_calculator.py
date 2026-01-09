@@ -22,15 +22,6 @@ python metric_calculator.py \
   --preds_layer_name pred_baseline_mean
 """
 
-# DELETE
-'''
-python metric_calculator.py \
-  --preds_files adamson_pred_baseline_0 adamson_pred_baseline_1 adamson_pred_baseline_2 \
-  --path_to_preds ../data/predictions \
-  --metrics weighted_delta_r2 \
-  --preds_layer_name pred_baseline_mean
-'''
-
 def main():
     parser = argparse.ArgumentParser(description="Preprocess and clean dataset")
     parser.add_argument("--preds_files", nargs="*", type=str, help="Names of the files (should be in data/predictions)")
@@ -46,6 +37,7 @@ def main():
     metric_dict = {metric: [] for metric in metrics}
 
     for split_number, file in enumerate(files):
+        print(f"\nSPLIT {split_number}")
         adata = sc.read(f"{path_to_preds}/{file}.h5ad")
         test_rows = ~np.all(np.isnan(adata.layers[preds_layer_name]), axis=1)
         actual = adata.X.toarray()[test_rows]
@@ -53,15 +45,15 @@ def main():
 
         if "pearson" in metrics:
             corr = calculate_pearson(actual, pred)
-            print(f"Mean pearson correlation across cells for split {split_number}:", corr)
+            print(f"Mean pearson correlation across cells for split {split_number}: {corr:.3f}")
             metric_dict["pearson"].append(corr)
         if "weighted_delta_r2" in metrics:
             r2 = calculate_weighted_delta_r2(adata, preds_layer_name)
-            print(f"Mean weighted delta R2 across perts for split {split_number}:", r2)
+            print(f"Mean weighted delta R2 across perts for split {split_number}: {r2:.3f}")
             metric_dict["weighted_delta_r2"].append(r2)
 
     for metric, results in metric_dict.items():
-        print(f"Average {metric} across all splits:", sum(results) / len(results))
+        print(f"Average {metric} across all splits: {(sum(results) / len(results)):.3f}")
 
 def calculate_pearson(actual, pred):
     correlations = np.array([
